@@ -6,16 +6,20 @@
       - if controller_path.match(/^admin/i)
         %a.navbar-brand.mt-2.mt-lg-0{:href => admin_root_path}
           %i.fas.fa-american-sign-language-interpreting.mx-3.text-success{:style => "font-size:32px"}
+        %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+          %li.nav-item
+            %a.nav-link{:href => admin_root_path} Dashboard
+          %li.nav-item
+            %a.nav-link{:href => admin_users_path} Users
+          %li.nav-item
+            %a.nav-link{:href => admin_roles_path} Roles
       - else
         %a.navbar-brand.mt-2.mt-lg-0{:href => root_path}
           %i.fas.fa-american-sign-language-interpreting.mx-3.text-success{:style => "font-size:32px"}
-      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
-        %li.nav-item
-          %a.nav-link{:href => admin_root_path} Dashboard
-        %li.nav-item
-          %a.nav-link{:href => admin_users_path} Users
-        %li.nav-item
-          %a.nav-link{:href => admin_roles_path} Roles
+        %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+          %li.nav-item
+            %a.nav-link{:href => root_path} Dashboard
+
     .d-flex.align-items-end
       - if current_user
         .dropdown
@@ -23,9 +27,7 @@
             = avatar(current_user, 32, 32, "rounded-circle")
           %ul.dropdown-menu.dropdown-menu-end{"aria-labelledby" => "navbarDropdownMenuAvatar"}
             %li
-              %a.dropdown-item{:href => user_path(current_user)} Show my profile
-            %li
-              %a.dropdown-item{:href => edit_user_registration_path} Edit my Profile
+              %a.dropdown-item{:href => user_path(current_user)} My profile
             %li
               %hr.dropdown-divider
             %li
