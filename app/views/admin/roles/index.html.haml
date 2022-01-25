@@ -1,0 +1,49 @@
+.row
+  .col-md-8
+    %table.table.table-striped.table-hover.table-sm.box-shadow
+      %caption.caption-top
+        .d-flex.justify-content-between
+          .h4 Roles list
+          = link_to "Add role", new_admin_role_path, :class => "btn btn-success"
+      %thead
+        %tr
+          %th
+          %th Role name
+          %th Description
+      %tbody
+        - @roles.each do |role|
+          %tr#roles{:onclick => "location.href='#{admin_role_path(role)}'"}
+            %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show role details"}
+              %i.fas.fa-user-cog
+            %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show role details"}
+              = role.name
+            %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show role details"}
+              = role.description
+  .col-md-4
+    %table.table.table-striped.table-hover.table-sm
+      %caption.caption-top
+        .d-flex.justify-content-between
+          .h4 Total users
+      %thead
+        %tr
+          %th Role
+          %th Count
+      %tbody
+        %tr#roles
+          %td
+            %i.fas.fa-user-cog.mx-2
+            %span Admins
+          %td
+            = User.where(:role_id => Role.find_by(:name => 'Admin').id).count
+        %tr#roles
+          %td
+            %i.fas.fa-user-tie.mx-2
+            %span Managers
+          %td
+            = User.where(:role_id => Role.find_by(:name => 'Manager').id).count
+        %tr#roles
+          %td
+            %i.fas.fa-user.mx-2
+            %span Operators
+          %td
+            = User.where(:role_id => Role.find_by(:name => 'Operator').id).count

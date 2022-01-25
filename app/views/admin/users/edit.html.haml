@@ -1,0 +1,86 @@
+.d-flex.justify-content-center
+  = form_for([:admin, @user], :url => admin_user_path) do |f|
+    .card.mb-3.my-3.shadow-3-strong{:style => "max-width: 100%; min-width: 55%"}
+      .row.g-0
+        .col-lg-4.text-center
+          = avatar(@user, 250, 250, "rounded-circle mx-3 my-3")
+        .col-lg-8
+          .card-body
+            .card-header
+              %h5
+                .d-flex.justify-content-between
+                  = full_name(@user)
+                  %i= @user.username
+            .container-fluid.my-3.px-1.shadow-3-strong
+              .row
+                .col-md-6
+                  = f.text_field :first_name,
+                                 :class => "form-control form-control-sm my-1 px-1",
+                                 :id => "first-name",
+                                 :placeholder => "Name",
+                                 :autocomplete => current_user.first_name
+                  = f.text_field :middle_name,
+                                 :class => "form-control form-control-sm my-1 px-1",
+                                 :id => "middle-name",
+                                 :placeholder => "Middle name",
+                                 :autocomplete => current_user.middle_name
+                  = f.text_field :last_name,
+                                 :class => "form-control form-control-sm my-1 px-1",
+                                 :id => "last-name",
+                                 :placeholder => "Surname",
+                                 :autocomplete => current_user.last_name
+                  .row
+                    .col-sm-3
+                      %label.col-form-label{:for => "birth-date"} Birth day
+                    .col-sm-9
+                      = f.date_field :birth_date,
+                                     :class => "form-control form-control-sm datepicker my-1 px-1",
+                                     :id => "birth-date",
+                                     :placeholder => "Birth date",
+                                     :autocomplete => current_user.birth_date
+
+                .col-md-6
+                  = f.file_field :avatar, :class => "form-control form-control-sm my-1 px-1"
+                  = f.email_field :email,
+                                  :class => "form-control form-control-sm my-1 px-1",
+                                  :id => "email",
+                                  :placeholder => "Email",
+                                  :autocomplete => current_user.email
+                  = f.text_field :username,
+                                 :class => "form-control form-control-sm my-1 px-1",
+                                 :id => "username",
+                                 :placeholder => "Username",
+                                 :autocomplete => current_user.username
+            .container-fluid.my-3.px-1.shadow-3-strong
+              .row
+                .text-center
+                  %i.small Set new password for user (leave blank if you don't want to change it)
+                  - if @minimum_password_length
+                    %em.small.text-danger
+                      Minimum:
+                      = @minimum_password_length
+                      characters
+                .col-md-6
+                  = f.password_field :password,
+                                 :class => "form-control form-control-sm my-1 px-1",
+                                 :id => "new-password",
+                                 :placeholder => "New password",
+                                 :autocomplete => current_user.username
+                .col-md-6
+                  = f.password_field :password_confirmation,
+                                   :class => "form-control form-control-sm my-1 px-1",
+                                   :id => "new-password-confirmation",
+                                   :placeholder => "New password confirmation",
+                                   :autocomplete => current_user.username
+            .container-fluid.my-3.px-1
+              .row
+                .col-md
+                  - Role.all.each do |role|
+                    = f.radio_button :role_id, role.id, :class => "mx-1"
+                    = f.label :role_id, role.name
+
+            .card-footer
+              .d-flex.justify-content-evenly
+                = f.submit "Update account", :class => "btn btn-success"
+                = link_to "Cancel", :back, :class => "btn btn-warning"
+                = link_to "Destroy", admin_user_path(@user), method: :delete, data: { confirm: "You sure?" }, :class => "btn btn-danger"

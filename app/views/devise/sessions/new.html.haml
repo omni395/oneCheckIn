@@ -1,0 +1,53 @@
+%section.my-5
+  .container-fluid.h-custom
+    .row.d-flex.justify-content-center.align-items-center.h-100
+      .col-md-9.col-lg-6.col-xl-5
+        %i.fas.fa-american-sign-language-interpreting.mx-3.text-success{:style => "font-size:200px"}
+      .col-md-8.col-lg-6.col-xl-4
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          = render "shared/flash_messages", resource: resource
+          .d-flex.flex-row.align-items-center.justify-content-center.justify-content-lg-start
+            %p.lead.fw-normal.mb-0.me-3 Sign in with
+            %button.btn.btn-muted.btn-floating.mx-1{:type => "button", :disabled => "disabled"}
+              %i.fab.fa-facebook-f
+            %button.btn.btn-muted.btn-floating.mx-1{:type => "button", :disabled => "disabled"}
+              %i.fab.fa-twitter
+            %button.btn.btn-muted.btn-floating.mx-1{:type => "button", :disabled => "disabled"}
+              %i.fab.fa-linkedin-in
+          .divider.d-flex.align-items-center.my-4
+            %p.text-center.fw-bold.mx-3.mb-0 Or
+
+          %label.form-label{:for => "email_field"} Email address
+          = f.email_field :email,
+                          :autofocus => true,
+                          :autocomplete => "email",
+                          :placeholder => "Enter a valid email address",
+                          :type => "email",
+                          :class => "form-outline mb-4 form-control form-control-lg",
+                          :id => "email_field"
+
+          %label.form-label{:for => "password_field"} Password
+          = f.password_field :password,
+                    :autocomplete => "password",
+                    :placeholder => "Enter password",
+                    :type => "password",
+                    :class => "form-outline mb-4 form-control form-control-lg",
+                    :id => "password_field"
+
+          .d-flex.justify-content-between.align-items-center
+            .d-flex.align-items-start
+              - if devise_mapping.rememberable?
+                = f.check_box :remember_me,
+                              :type => "checkbox",
+                              :value => "",
+                              :class => "form-check mb-0 mx-1",
+                              :id => "label_field"
+                %label.form-check-label{:for => "label_field"} Remember me
+            %a.text-body{:href => new_password_path(resource_name)} Forgot password?
+          .text-center.text-lg-start.mt-4.pt-2
+            = f.submit "Login",
+                      :style => "padding-left: 2.5rem; padding-right: 2.5rem;",
+                      :class => "btn btn-primary btn-lg"
+          %p.small.fw-bold.mt-2.pt-1.mb-0
+            Don't have an account?
+            %a.link-danger{:href => new_user_registration_path} Register

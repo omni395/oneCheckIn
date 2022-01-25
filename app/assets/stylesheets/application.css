@@ -1,0 +1,14 @@
+/* Application styles */
+
+/*@import 'actiontext.css'; */
+
+*= require toastr
+
+body {
+    background-color: #f4f4f4 !important;
+}
+
+/* Pionter cursor for Admin Users table */
+#users, #roles {
+  cursor: pointer;
+}

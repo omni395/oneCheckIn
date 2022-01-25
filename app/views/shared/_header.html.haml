@@ -1,0 +1,45 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container-fluid
+    %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-mdb-target" => "#navbarSupportedContent", "data-mdb-toggle" => "collapse", :type => "button"}
+      %i.fas.fa-bars
+    #navbarSupportedContent.collapse.navbar-collapse
+      - if controller_path.match(/^admin/i)
+        %a.navbar-brand.mt-2.mt-lg-0{:href => admin_root_path}
+          %i.fas.fa-american-sign-language-interpreting.mx-3.text-success{:style => "font-size:32px"}
+      - else
+        %a.navbar-brand.mt-2.mt-lg-0{:href => root_path}
+          %i.fas.fa-american-sign-language-interpreting.mx-3.text-success{:style => "font-size:32px"}
+      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        %li.nav-item
+          %a.nav-link{:href => admin_root_path} Dashboard
+        %li.nav-item
+          %a.nav-link{:href => admin_users_path} Users
+        %li.nav-item
+          %a.nav-link{:href => admin_roles_path} Roles
+    .d-flex.align-items-end
+      - if current_user
+        .dropdown
+          %a#navbarDropdownMenuAvatar.dropdown-toggle.d-flex.align-items-center.hidden-arrow{"aria-expanded" => "false", "data-mdb-toggle" => "dropdown", :href => "#", :role => "button"}
+            = avatar(current_user, 32, 32, "rounded-circle")
+          %ul.dropdown-menu.dropdown-menu-end{"aria-labelledby" => "navbarDropdownMenuAvatar"}
+            %li
+              %a.dropdown-item{:href => user_path(current_user)} Show my profile
+            %li
+              %a.dropdown-item{:href => edit_user_registration_path} Edit my Profile
+            %li
+              %hr.dropdown-divider
+            %li
+              - if controller_path.match(/^admin/i)
+                %a.dropdown-item.text-info{:href => root_path} Back to site
+              - else
+                %a.dropdown-item.text-info{:href => admin_root_path} Admin dashboard
+            %li
+              %hr.dropdown-divider
+            %li
+              %a.dropdown-item{:href => destroy_user_session_path, :method => :delete} Sign out
+      - else
+        %ul.nav.justify-content-end
+          %li
+            %a.nav-link.px-2.link-secondary.mx-2{:href => new_user_session_path} Sign In
+          %li
+            %a.nav-link.px-2.link-dark.btn.btn-outline-success.mx-2{:href => new_user_registration_path} Sign Up

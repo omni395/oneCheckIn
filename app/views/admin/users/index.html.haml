@@ -1,0 +1,35 @@
+%table.table.table-striped.table-hover.table-sm
+  %caption.caption-top
+    .d-flex.justify-content-between
+      .h4 Users list
+      = link_to "Add user", new_admin_user_path, :class => "btn btn-success"
+  %thead
+    %tr
+      %th
+      %th
+      %th Full name
+      %th Username
+      %th Email
+      %th Role
+      %th Sign in count
+      %th Last sign in at
+  %tbody
+    - @users.each do |user|
+      %tr#users{:onclick => "location.href='#{admin_user_path(user)}'"}
+        %td= user.id
+        %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show user details"}
+          = avatar(user, 32, 32, "rounded-circle")
+        %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show user details"}
+          = user.first_name
+          = user.middle_name
+          = user.last_name
+        %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show user details"}
+          = user.username
+        %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show user details"}
+          = user.email
+        %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => user.role.description}
+          = user.role.name
+        %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => user.role.description}
+          = user.sign_in_count
+        %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => user.role.description}
+          = user.last_sign_in_at
