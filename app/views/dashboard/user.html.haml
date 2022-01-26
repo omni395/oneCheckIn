@@ -1,29 +1,27 @@
-.row.mb-3.my-3
-  .col-lg-6
+.row
+  .col-xl-4.mb-3.my-3
     .card.shadow-3-strong{:style => "max-width: 100%; min-width: 55%;"}
-      .row.g-0
-        .col-lg-4.text-center
-          = avatar(current_user, 250, 250, "rounded-circle mx-3 my-3")
-        .col-lg-8
-          .card-body
-            .card-header
-              %h5
-                .d-flex.justify-content-between
-                  = full_name(current_user)
-                  %i= current_user.username
-                  %i= current_user.email
-              %small= current_user.role.name
-            %p.card-title.my-3
-              Birth day:
-              = current_user.birth_date
-            %p.card-title.my-3
-              User user user
-            %small.text-muted Last sign in #{current_user.last_sign_in_at}
-            -#.strftime("%d-%m-%Y at %H:%M")
-            .card-footer
-              .d-flex.justify-content-evenly
-                = link_to "Edit", edit_user_registration_path(current_user), :class => "btn btn-success"
-                = link_to "Delete", user_registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete, :class => "disabled btn btn-danger"
-  .col-lg-6
+      .d-flex.justify-content-center
+        = avatar(current_user, 250, 250, "rounded-circle mx-3 my-3")
+      .card-body
+        .card-header
+          %h5
+            .d-flex.justify-content-between
+              = full_name(current_user)
+              %i= current_user.username
+              %i= current_user.email
+          %small= current_user.role.name
+        %p.card-title.my-3
+          Birth day:
+          = current_user.birth_date
+        %p.card-title.my-3
+          User user user
+        %small.text-muted Last sign in #{current_user.last_sign_in_at}
+        -#.strftime("%d-%m-%Y at %H:%M")
+        .card-footer
+          .d-flex.justify-content-evenly
+            = link_to "Edit", edit_user_registration_path(current_user), :class => "btn btn-success"
+            = link_to "Delete", user_registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete, :class => "disabled btn btn-danger"
+  .col-xl-8.mb-3.my-3
     .container-fluid.shadow-3-strong
       .h5 My activity:

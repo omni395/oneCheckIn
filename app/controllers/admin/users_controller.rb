@@ -5,28 +5,19 @@ class Admin::UsersController < ApplicationController
 
   def index
     @users = User.where.not(:id => current_user.id).order("id ASC")
-    #authorize @users
-  end
-
-  def show
-    @user = User.find(params[:id])
-    #authorize @user
-  end
-
-  def new
     @user = User.new
-    #authorize @user
+    #authorize @users
   end
 
   def create
     @user = User.new(user_params)
     #authorize @user
-    if @user.save
-      flash[:notice] = "Successfully created User."
-      redirect_to admin_users_path
-    else
-      render :action => 'new'
-    end
+    #if @user.save
+    #  flash[:notice] = "Successfully created User."
+    #  redirect_to admin_users_path
+    #else
+    #  render :action => 'new'
+    #end
   end
 
   def edit
@@ -48,22 +39,12 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  #def destroy
-  #  @user.destroy
-  #  redirect_to admin_users_path
-    #@user = User.find(params[:id])
-    #authorize @user
-    #if @user.destroy
-    #  flash[:notice] = "Successfully deleted User."
-    #  redirect_to admin_users_path
-    #else
-    #  redirect_to admin_users_path, flash: { error: "User could not be deleted." }
-    #end
-  #end
   def destroy
       @user = User.find(params[:id])
       @user.destroy
-      redirect_to admin_users_path
+      respond_to do |format|
+        format.html { redirect_to admin_users_path, notice: "User was successfully destroyed." }
+      end
   end
 
   private

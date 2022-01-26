@@ -2,7 +2,11 @@
   %caption.caption-top
     .d-flex.justify-content-between
       .h4 Users list
-      = link_to "Add user", new_admin_user_path, :class => "btn btn-success"
+      = link_to "Add user", admin_users_path,
+                            :class => "btn btn-success",
+                            "data-mdb-toggle" => "modal",
+                            "data-mdb-target" => "#newUserModal"
+      = render :partial => "new", :locals => { :user => @user}
   %thead
     %tr
       %th
@@ -15,7 +19,9 @@
       %th Last sign in at
   %tbody
     - @users.each do |user|
-      %tr#users{:onclick => "location.href='#{admin_user_path(user)}'"}
+      = render :partial => "show", :locals => { :user => user}
+      = render :partial => "edit", :locals => { :user => user}
+      %tr#users{"data-mdb-toggle" => "modal", "data-mdb-target" => "#showUserModal-#{user.id}"}
         %td= user.id
         %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show user details"}
           = avatar(user, 32, 32, "rounded-circle")

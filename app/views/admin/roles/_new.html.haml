@@ -1,0 +1,20 @@
+.modal.fade{:id => "newRoleModal", "aria-hidden" => "true", "aria-labelledby" => "newRoleModalLabel", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .modal-header.mb-3
+          %h5.modal-title{:id => "newRoleModal"}
+            New role
+          %button.btn-close{"aria-label" => "Close", "data-mdb-dismiss" => "modal", :type => "button"}
+        = form_for([:admin, @role]) do |f|
+          = f.text_field :name,
+                         :class => "form-control my-1 px-1",
+                         :id => "role-name",
+                         :placeholder => "Name"
+          = f.text_field :description,
+                         :class => "form-control my-1 px-1",
+                         :id => "role-description",
+                         :placeholder => "Description"
+          .modal-footer.my-3
+            %button.btn.btn-secondary{"data-mdb-dismiss" => "modal", :type => "button"} Close
+            = f.submit "Create role", :class => "btn btn-success"

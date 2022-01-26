@@ -4,7 +4,11 @@
       %caption.caption-top
         .d-flex.justify-content-between
           .h4 Roles list
-          = link_to "Add role", new_admin_role_path, :class => "btn btn-success"
+          = link_to "Add role", admin_roles_path,
+                                :class => "btn btn-success",
+                                "data-mdb-toggle" => "modal",
+                                "data-mdb-target" => "#newRoleModal"
+          = render :partial => "new", :locals => { :role => @role}
       %thead
         %tr
           %th
@@ -12,12 +16,13 @@
           %th Description
       %tbody
         - @roles.each do |role|
-          %tr#roles{:onclick => "location.href='#{admin_role_path(role)}'"}
-            %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show role details"}
+          = render :partial => "edit", :locals => { :role => role}
+          %tr#roles{"data-mdb-toggle" => "modal", "data-mdb-target" => "#editRoleModal-#{role.id}"}
+            %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Edit role details"}
               %i.fas.fa-user-cog
-            %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show role details"}
+            %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Edit role details"}
               = role.name
-            %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show role details"}
+            %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Edit role details"}
               = role.description
   .col-md-4
     %table.table.table-striped.table-hover.table-sm

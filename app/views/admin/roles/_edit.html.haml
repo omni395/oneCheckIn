@@ -1,0 +1,23 @@
+.modal.fade{:id => "editRoleModal-#{role.id}", "aria-hidden" => "true", "aria-labelledby" => "editRoleModalLabel-#{role.id}", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .modal-header.mb-3
+          %h5.modal-title{:id => "editRoleModal-#{role.id}"}
+            Edit role #{role.name}
+          %button.btn-close{"aria-label" => "Close", "data-mdb-dismiss" => "modal", :type => "button"}
+        = form_for([:admin, role]) do |f|
+          = f.text_field :name,
+                         :class => "form-control my-1 px-1",
+                         :id => "first-name",
+                         :placeholder => "Name",
+                         :autocomplete => role.name
+          = f.text_field :description,
+                         :class => "form-control my-1 px-1",
+                         :id => "middle-name",
+                         :placeholder => "Description",
+                         :autocomplete => role.description
+          .modal-footer.my-3
+            %button.btn.btn-secondary{"data-mdb-dismiss" => "modal", :type => "button"} Close
+            = link_to "Delete", admin_role_path(role), :method => :delete, data: { "turbo-method": :delete, confirm: "Are you sure?" }, :class => "btn btn-danger"
+            = f.submit "Update role", :class => "btn btn-success"

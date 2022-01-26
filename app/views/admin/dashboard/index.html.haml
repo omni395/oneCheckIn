@@ -2,12 +2,11 @@
   .col-md-6
     .card.shadow-3-strong.mt-2{:style => "max-width: 100%;"}
       .card-body
-        .d-flex
-          %table.table.table-responsive.table-striped.table-hover.table-sm
+        .table-responsive-md
+          %table.table.table-striped.table-hover.table-sm
             %caption.caption-top
               .d-flex.justify-content-between
                 %h5.card-title Users list
-                = link_to "Add user", new_admin_user_path, :class => "btn btn-success"
             %thead
               %tr
                 %th
@@ -41,3 +40,4 @@
           .col-md-4
             %strong.mx-2 Operators
             = User.where(:role_id => Role.find_by(:name => 'Operator').id).count
+  .col-md-6

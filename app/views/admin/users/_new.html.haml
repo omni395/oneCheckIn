@@ -1,0 +1,78 @@
+.modal.fade{:id => "newUserModal", "aria-hidden" => "true", "aria-labelledby" => "newUserModalLabel", :tabindex => "-1"}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-body
+        .modal-header.mb-3
+          %h5.modal-title{:id => "newUserModal"}
+            Edit user #{user.email}
+          %button.btn-close{"aria-label" => "Close", "data-mdb-dismiss" => "modal", :type => "button"}
+        = form_for([:admin, @user]) do |f|
+          .d-flex.justify-content-center.my-3
+            .card.mb-3{:style => "max-width: 100%;", :class => "shadow"}
+              .row.g-0
+                .col-md
+                  .card-body
+                    .container-fluid.shadow.my-3.px-1
+                      .row
+                        .col-md-6
+                          = f.text_field :first_name,
+                                         :class => "form-control my-1 px-1",
+                                         :id => "first-name",
+                                         :placeholder => "Name",
+                                         :autocomplete => current_user.first_name
+                          = f.text_field :middle_name,
+                                         :class => "form-control my-1 px-1",
+                                         :id => "middle-name",
+                                         :placeholder => "Middle name",
+                                         :autocomplete => current_user.middle_name
+                          = f.text_field :last_name,
+                                         :class => "form-control my-1 px-1",
+                                         :id => "last-name",
+                                         :placeholder => "Surname",
+                                         :autocomplete => current_user.last_name
+                          .row
+                            .col-sm-3
+                              %label.col-form-label{:for => "birth-date"} Birth day:
+                            .col-sm-9
+                              = f.date_field :birth_date,
+                                             :class => "form-control datepicker my-1 px-1",
+                                             :id => "birth-date",
+                                             :placeholder => "Birth date",
+                                             :autocomplete => current_user.birth_date
+                        .col-md-6
+                          = f.file_field :avatar, :class => "form-control my-1 px-1"
+                          = f.email_field :email,
+                                          :class => "form-control my-1 px-1",
+                                          :id => "email",
+                                          :placeholder => "Email",
+                                          :autocomplete => current_user.email
+                          = f.text_field :username,
+                                         :class => "form-control my-1 px-1",
+                                         :id => "username",
+                                         :placeholder => "Username",
+                                         :autocomplete => current_user.username
+                    .container-fluid.shadow.my-3.px-1
+                      .row
+                        .text-center
+                          %i.small Set password (minimum 6 characters)
+                        .col-md-6
+                          = f.password_field :password,
+                                         :class => "form-control my-1 px-1",
+                                           :id => "new-password",
+                                           :placeholder => "New password",
+                                           :autocomplete => current_user.username
+                        .col-md-6
+                          = f.password_field :password_confirmation,
+                                         :class => "form-control my-1 px-1",
+                                         :id => "new-password-confirmation",
+                                         :placeholder => "New password confirmation",
+                                         :autocomplete => current_user.username
+                    .container-fluid.my-3.px-1
+                      .row
+                        .col-md
+                          - Role.all.each do |role|
+                            = f.radio_button :role_id, role.id, :class => "mx-1"
+                            = f.label :role_id, role.name
+                    .modal-footer
+                      %button.btn.btn-secondary{"data-mdb-dismiss" => "modal", :type => "button"} Close
+                      = f.submit "Create user", :class => "btn btn-success"
