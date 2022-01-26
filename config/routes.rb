@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :tests
   root to: 'dashboard#index'
 
   # Users routes
