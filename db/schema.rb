@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_26_153939) do
+ActiveRecord::Schema.define(version: 2022_01_27_075801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,19 +53,6 @@ ActiveRecord::Schema.define(version: 2022_01_26_153939) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "tests", force: :cascade do |t|
-    t.string "test"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -78,19 +65,17 @@ ActiveRecord::Schema.define(version: 2022_01_26_153939) do
     t.string "middle_name"
     t.string "last_name"
     t.string "username"
-    t.bigint "role_id", null: false
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at", precision: 6
     t.datetime "last_sign_in_at", precision: 6
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.date "birth_date"
+    t.integer "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "users", "roles"
 end

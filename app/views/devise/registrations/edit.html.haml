@@ -83,5 +83,6 @@
                                    :placeholder => "Current password"
                   %i.small.text-danger (we need your current password to confirm your changes)
                 .col-md-6
-            = f.submit "Update account", :class => "btn btn-success"
-            = link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
+            .d-flex.justify-content-end
+              = f.submit "Update account", :class => "btn btn-success"
+              -#= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete

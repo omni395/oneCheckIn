@@ -4,7 +4,7 @@
       .modal-body
         .modal-header.mb-3
           %h5.modal-title{:id => "editUserModalLabel-#{user.id}"}
-            Edit user #{user.email}
+            Edit user: #{user.email}
           %button.btn-close{"aria-label" => "Close", "data-mdb-dismiss" => "modal", :type => "button"}
         = form_for([:admin, user]) do |f|
           .card.mb-3.my-3.shadow-3-strong{:style => "max-width: 100%; min-width: 55%"}
@@ -79,11 +79,11 @@
                   .container-fluid.my-3.px-1
                     .row
                       .col-md
-                        - Role.all.each do |role|
-                          = f.radio_button :role_id, role.id,
+                        - User.roles.keys.each do |role|
+                          = f.radio_button :role, role,
                                            :class => "mx-1"
 
-                          = f.label :role_id, role.name
+                          = f.label :role, role
             .modal-footer
               %button.btn.btn-secondary{"data-mdb-dismiss" => "modal", :type => "button"} Close
               %button.btn.btn-warning{"data-mdb-target" => "#showUserModal-#{user.id}",

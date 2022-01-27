@@ -4,10 +4,10 @@
       .modal-body
         .modal-header.mb-3
           %h5.modal-title{:id => "newUserModal"}
-            Edit user #{user.email}
+            New user
           %button.btn-close{"aria-label" => "Close", "data-mdb-dismiss" => "modal", :type => "button"}
         = form_for([:admin, @user]) do |f|
-          .d-flex.justify-content-center.my-3
+          .d-flex.justify-content-center
             .card.mb-3{:style => "max-width: 100%;", :class => "shadow"}
               .row.g-0
                 .col-md
@@ -70,9 +70,12 @@
                     .container-fluid.my-3.px-1
                       .row
                         .col-md
-                          - Role.all.each do |role|
-                            = f.radio_button :role_id, role.id, :class => "mx-1"
-                            = f.label :role_id, role.name
-                    .modal-footer
-                      %button.btn.btn-secondary{"data-mdb-dismiss" => "modal", :type => "button"} Close
-                      = f.submit "Create user", :class => "btn btn-success"
+                          - User.roles.keys.each do |role|
+                            = f.radio_button :role, role,
+                                             :class => "mx-1"
+
+                            = f.label :role, role
+                    .card-footer
+                      .d-flex.justify-content-end
+                        %button.btn.btn-secondary.mx-3{"data-mdb-dismiss" => "modal", :type => "button"} Close
+                        = f.submit "Create user", :class => "btn btn-success"

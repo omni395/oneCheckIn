@@ -2,11 +2,12 @@
   %caption.caption-top
     .d-flex.justify-content-between
       .h4 Users list
-      = link_to "Add user", admin_users_path,
-                            :class => "btn btn-success",
-                            "data-mdb-toggle" => "modal",
-                            "data-mdb-target" => "#newUserModal"
-      = render :partial => "new", :locals => { :user => @user}
+      - if current_user.admin?
+        = link_to "Add user", admin_users_path,
+                              :class => "btn btn-success",
+                              "data-mdb-toggle" => "modal",
+                              "data-mdb-target" => "#newUserModal"
+        = render :partial => "new", :locals => { :user => @user}
   %thead
     %tr
       %th
@@ -33,9 +34,9 @@
           = user.username
         %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show user details"}
           = user.email
-        %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => user.role.description}
-          = user.role.name
-        %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => user.role.description}
+        %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show user details"}
+          = user.role
+        %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show user details"}
           = user.sign_in_count
-        %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => user.role.description}
+        %td{"data-bs-placement" => "top", "data-bs-toggle" => "tooltip", :title => "Show user details"}
           = user.last_sign_in_at

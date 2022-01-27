@@ -10,7 +10,7 @@
               = full_name(current_user)
               %i= current_user.username
               %i= current_user.email
-          %small= current_user.role.name
+          -#%small= current_user.role.name
         %p.card-title.my-3
           Birth day:
           = current_user.birth_date
@@ -20,7 +20,7 @@
         -#.strftime("%d-%m-%Y at %H:%M")
         .card-footer
           .d-flex.justify-content-evenly
-            = link_to "Edit", edit_user_registration_path(current_user), :class => "btn btn-success"
+            = link_to "Edit", edit_user_registration_path, :class => "btn btn-success"
             = link_to "Delete", user_registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete, :class => "disabled btn btn-danger"
   .col-xl-8.mb-3.my-3
     .container-fluid.shadow-3-strong

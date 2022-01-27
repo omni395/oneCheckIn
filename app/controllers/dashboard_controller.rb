@@ -4,7 +4,6 @@ class DashboardController < ApplicationController
   end
 
   def user
-    current_user
   end
-  
+
 end
