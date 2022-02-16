@@ -50,6 +50,7 @@
                         = f.file_field :avatar,
                                        :class => "form-control my-1 px-1",
                                        :id => "user-avatar-#{user.id}"
+                        -#= link_to "X", "", :on_click => user.avatar.purge, :class => "text-danger" if user.avatar.attached?
                         = f.email_field :email,
                                         :class => "form-control my-1 px-1",
                                         :id => "email-#{user.id}",

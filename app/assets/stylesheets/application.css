@@ -2,7 +2,7 @@
 
 /*@import 'actiontext.css'; */
 
-*= require toastr
+*= require toastr;
 
 body {
     background-color: #f4f4f4 !important;
@@ -11,4 +11,10 @@ body {
 /* Pionter cursor for Admin Users table */
 #users, #roles {
   cursor: pointer;
+}
+
+.trix-button--icon-increase-nesting-level,
+.trix-button--icon-decrease-nesting-level { display: none; }
+trix-editor {
+    min-height: 15em !important;
 }

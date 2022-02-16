@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   has_one_attached :avatar
+  has_many :articles
 
   def set_default_role
     self.role ||= :operator

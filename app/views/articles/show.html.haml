@@ -1,0 +1,13 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @article.name
+%p
+  %b Description:
+  = @article.description
+%p
+  %b User:
+  = @article.user.role
+
+= link_to 'Back', articles_path

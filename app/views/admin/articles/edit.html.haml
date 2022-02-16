@@ -1,0 +1,37 @@
+.container.my-3.w-75
+  %h5 Edit article: #{@article.name}
+  = form_for [:admin, @article] do |f|
+    - if @article.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@article.errors.count, "error")} prohibited this article from being saved:"
+        %ul
+          - @article.errors.full_messages.each do |message|
+            %li= message
+    .row
+      .col-lg-2
+        .d-flex.justify-content-center
+          = article_image_thumbnail(@article, 150, 150, "rounded-circle mx-2")
+      .col-lg-10
+        .form-group.mb-3
+          %label Article title:
+          = f.text_field :name, :class => "form-control"
+        .form-group.mb-3
+          %label Short description:
+          = f.text_field :description, :class => "form-control"
+
+        .form-group.mb-3
+          .row
+            .col-6
+              %label Select category:
+              %br
+              - Article.categories.keys.each do |category|
+                = f.radio_button :category, category,
+                                 :class => "mx-1"
+                = f.label :category, category
+            .col-6
+              %label Add/Change image
+              = f.file_field :article_image, :class => "form-control form-control-sm"
+        .form-group.mb-3
+          .d-flex.justify-content-end
+            = f.submit 'Save', :class => "btn btn-success mx-2"
+            = link_to 'Back', :back, :class => "btn btn-warning"

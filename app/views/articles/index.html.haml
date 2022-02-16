@@ -1,0 +1,17 @@
+%h1 Listing articles
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th User
+      %th
+
+  %tbody
+    - @articles.each do |article|
+      %tr
+        %td= article.name
+        %td= article.description
+        %td= article.user.role
+        %td= link_to 'Show', article
