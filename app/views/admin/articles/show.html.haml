@@ -17,32 +17,7 @@
               Created by #{@article.user.role} at #{@article.created_at}
           .card-footer
             .d-flex.justify-content-end
-              -#= link_to 'Edit', edit_admin_article_path(@article), :class => "btn btn-success mx-2"
+              = link_to 'Edit', edit_admin_article_path(@article), :class => "btn btn-success mx-2"
               = link_to 'Back', admin_articles_path, :class => "btn btn-warning"
     .col-lg-8
-      - if @article.paragraphs
-        - @article.paragraphs.each do |paragraph|
-          = paragraph.id
-          = link_to 'X', admin_article_paragraph_path(@article, paragraph),
-                         :method => :delete,
-                         data: { "turbo-method": :delete, confirm: "Are you sure?" },
-                         :class => "btn btn-danger"
-          %p= paragraph.content
-
-      - else
-        .h3 No paragraphs yet
-
-      .container-fluid{"data-controller" => "paragraph"}
-        .d-flex.justify-content-end
-          %button.btn.btn-success.mb-3{"data-action" => "paragraph#toggleForm"} Show/Hide form
-        .container
-          = form_for([:admin, @article], :html => {"data-paragraph-target" => "hideable", :hidden => ""}) do |f|
-            - if @article.errors.any?
-              #error_explanation
-                %h2= "#{pluralize(@article.errors.count, "error")} prohibited this article from being saved:"
-                %ul
-                  - @article.errors.full_messages.each do |message|
-                    %li= message
-            = f.fields_for :paragraphs, Paragraph.new do |paragraph|
-              = paragraph.rich_text_area :content
-            = f.submit "Save", :class => "btn btn-success mt-2"
+      = @article.content

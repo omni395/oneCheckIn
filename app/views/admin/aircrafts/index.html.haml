@@ -1,0 +1,35 @@
+%h1 Listing aircrafts
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th Www
+      %th Iata
+      %th Icao
+      %th Checkin link
+      %th Manage booking
+      %th User
+      %th
+      %th
+      %th
+
+  %tbody
+    - @aircrafts.each do |aircraft|
+      %tr
+        %td= aircraft.name
+        %td= aircraft.description
+        %td= aircraft.www
+        %td= aircraft.iata
+        %td= aircraft.icao
+        %td= aircraft.checkin_link
+        %td= aircraft.manage_booking
+        %td= aircraft.user
+        %td= link_to 'Show', aircraft
+        %td= link_to 'Edit', edit_aircraft_path(aircraft)
+        %td= link_to 'Destroy', aircraft, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Aircraft', new_aircraft_path

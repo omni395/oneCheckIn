@@ -31,6 +31,12 @@
             .col-6
               %label Add/Change image
               = f.file_field :article_image, :class => "form-control form-control-sm"
+          .row
+            .col
+              .form-group.mb-3
+                %label Short description:
+                = f.rich_text_area :content, :class => "form-control"
+                
         .form-group.mb-3
           .d-flex.justify-content-end
             = f.submit 'Save', :class => "btn btn-success mx-2"

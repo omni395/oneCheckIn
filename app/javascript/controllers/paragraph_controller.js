@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "hideable" ]
+  //static targets = [ "hideable" ]
 
   //showForm() {
   //  this.hideableTargets.forEach(el => {
@@ -15,9 +15,9 @@ export default class extends Controller {
   //  });
   //}
 
-  toggleForm() {
-    this.hideableTargets.forEach((el) => {
-      el.hidden = !el.hidden
-    });
-  }
+  //toggleForm() {
+  //  this.hideableTargets.forEach((el) => {
+  //    el.hidden = !el.hidden
+  //  });
+  //}
 }

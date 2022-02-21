@@ -9,7 +9,7 @@ class Admin::ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new
+    @article = current_user.articles.build
   end
 
   def edit
@@ -19,10 +19,9 @@ class Admin::ArticlesController < ApplicationController
   def create
     @article = current_user.articles.build(article_params)
     authorize [:admin, Article], :create?
-
     respond_to do |format|
       if @article.save
-        format.html { redirect_to admin_article_path(@article), notice: "Article was successfully created." }
+        format.html { redirect_to edit_admin_article_path(@article), notice: "Article was successfully created." }
         format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -35,7 +34,6 @@ class Admin::ArticlesController < ApplicationController
     authorize [:admin, Article], :update?
     respond_to do |format|
       if @article.update(article_params)
-        @article.paragraphs.build
         format.html { redirect_to admin_article_path(@article), notice: "Article was successfully updated." }
         format.json { render :show, status: :ok, location: @article }
       else
@@ -48,9 +46,8 @@ class Admin::ArticlesController < ApplicationController
   def destroy
     authorize [:admin, Article], :destroy?
     @article.destroy
-
     respond_to do |format|
-      format.html { redirect_to admin_articles_path, notice: "Article was successfully destroyed." }
+      format.html { redirect_to admin_articles_url, notice: "Article was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -61,7 +58,6 @@ class Admin::ArticlesController < ApplicationController
     end
 
     def article_params
-      params.require(:article).permit(:article_image, :name, :description, :category, :user_id,
-                                      paragraphs_attributes: [:_destroy, :id, :content] )
+      params.require(:article).permit(:article_image, :name, :description, :category, :user_id, :content)
     end
 end

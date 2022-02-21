@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @aircraft.name
+%p
+  %b Description:
+  = @aircraft.description
+%p
+  %b Www:
+  = @aircraft.www
+%p
+  %b Iata:
+  = @aircraft.iata
+%p
+  %b Icao:
+  = @aircraft.icao
+%p
+  %b Checkin link:
+  = @aircraft.checkin_link
+%p
+  %b Manage booking:
+  = @aircraft.manage_booking
+%p
+  %b User:
+  = @aircraft.user
+
+= link_to 'Edit', edit_aircraft_path(@aircraft)
+\|
+= link_to 'Back', aircrafts_path

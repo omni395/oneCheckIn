@@ -1,0 +1,13 @@
+-#= turbo_frame_tag dom_id(article) do
+.div
+  %table
+    %thead
+      %tr
+        %th Name
+        %th Description
+        %th User
+    %tbody
+      %tr
+        %td= article.name
+        %td= article.description
+        %td= article.user.role

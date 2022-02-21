@@ -9,5 +9,7 @@
 %p
   %b User:
   = @article.user.role
-
+%p
+  = @article.content
+  
 = link_to 'Back', articles_path

@@ -3,8 +3,6 @@ import "controllers"
 import trix from "trix"
 import "@rails/actiontext"
 
-//import "./trix.js"
-
 // Dropdown
 var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
 var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {

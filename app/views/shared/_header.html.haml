@@ -13,6 +13,8 @@
             %a.nav-link{:href => admin_users_path} Users
           %li.nav-item
             %a.nav-link{:href => admin_articles_path} Articles
+          %li.nav-item
+            %a.nav-link{:href => admin_aircrafts_path} Aircrafts
       - else
         %a.navbar-brand.mt-2.mt-lg-0{:href => root_path}
           %i.fas.fa-american-sign-language-interpreting.mx-3.text-success{:style => "font-size:32px"}
@@ -21,6 +23,8 @@
             %a.nav-link{:href => root_path} Dashboard
           %li.nav-item
             %a.nav-link{:href => articles_path} Articles
+          %li.nav-item
+            %a.nav-link{:href => aircrafts_path} Aircrafts
 
     .d-flex.align-items-end
       - if current_user
